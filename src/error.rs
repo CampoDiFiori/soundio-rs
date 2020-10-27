@@ -106,8 +106,7 @@ pub type Result<T> = result::Result<T, Error>;
 // Implement displaying the error. We just use the description.
 impl fmt::Display for Error {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
-        use std::error::Error;
-        f.write_str(self.description())
+        f.write_str(&self.to_string().as_str())
     }
 }
 
@@ -129,7 +128,6 @@ impl error::Error for Error {
 
 impl From<Error> for String {
     fn from(err: Error) -> String {
-        use std::error::Error;
-        err.description().to_string()
+        err.to_string()
     }
 }
